@@ -17,6 +17,11 @@ class DecksDisplay extends Component {
     this.props.getDecks();
   }
 
+  /**
+   * Renders a card view with a deck's title and number of questions
+   *
+   * @function renderDeckList
+   */
   renderDeckList = ({ item }) => (
     <TouchableOpacity
       onPress={() =>
@@ -80,6 +85,11 @@ const mapStateToProps = ({ decks }) => ({
   decks: decks ? getSortedList(decks) : []
 });
 
+/**
+ * Return sorted decks list based on title
+ *
+ * @function getSortedList
+ */
 const getSortedList = decks => {
   if (decks) {
     return Object.keys(decks)

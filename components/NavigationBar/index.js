@@ -15,6 +15,7 @@ import { purple, white } from "../../utils/colors";
 // Components
 import DecksDisplay from "../DecksDisplay";
 import CreateDeck from "../CreateDeck";
+import DeckDetail from "../DeckDetail";
 
 const RouteConfigs = {
   DecksDisplay: {
@@ -71,6 +72,16 @@ const MainNavigator = createStackNavigator({
     screen: TabsContainer,
     navigationOptions: {
       header: null
+    }
+  },
+
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: {
+      headerTintColor: Color.White,
+      headerStyle: {
+        backgroundColor: Color.Purple
+      }
     }
   }
 });
