@@ -1,14 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
+import { Provider } from "react-redux";
 
 // Redux
 import { createStore } from "redux";
-import { Provider } from "react-redux";
-import middleware from "./middleware";
-import reducer from "./reducers";
 
 // Components
 import NavigationBar from "./components/NavigationBar";
+import middleware from "./middleware";
+import reducer from "./reducers";
 
 const store = createStore(reducer, middleware);
 
@@ -18,7 +18,6 @@ export default class App extends React.Component {
       <Provider store={store}>
         <View style={{ flex: 1 }}>
           <NavigationBar />
-          <Text>Test</Text>
         </View>
       </Provider>
     );

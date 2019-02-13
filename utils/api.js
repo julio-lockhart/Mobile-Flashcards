@@ -15,7 +15,7 @@ export const getDecks = () => {
   );
 };
 
-const setDummyData = async () => {
+const setDummyData = () => {
   const decks = {
     React: {
       title: "React",
@@ -42,15 +42,15 @@ const setDummyData = async () => {
     }
   };
 
-  await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks));
+  AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks));
   return decks;
 };
 
-const formatDecks = async results => {
+const formatDecks = results => {
   //return results === null ? setDummyData() : JSON.parse(results);
   if (results === null) {
     console.log("Results are empty");
-    return await setDummyData();
+    return setDummyData();
   } else {
     console.log("Results are not empty");
     return JSON.parse(results);
