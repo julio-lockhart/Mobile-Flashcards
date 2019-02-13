@@ -80,7 +80,7 @@ const MainNavigator = createStackNavigator({
     navigationOptions: {
       headerTintColor: Color.White,
       headerStyle: {
-        backgroundColor: Color.Purple
+        backgroundColor: Color.Blue
       }
     }
   }
