@@ -12,7 +12,6 @@ const ICON_SIZE = 20;
 
 class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => {
-    console.log("Title", navigation.state.params.title);
     return {
       title: navigation.state.params.title
     };
@@ -40,7 +39,7 @@ class DeckDetail extends Component {
               buttonStyle={styles.buttonStyle}
               title="Add Card"
               onPress={() => {
-                this.props.navigation.navigate("AddQuestion", {
+                this.props.navigation.navigate("AddCard", {
                   title: title
                 });
               }}
