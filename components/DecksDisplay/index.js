@@ -16,7 +16,7 @@ class DecksDisplay extends Component {
 
     return (
       <View>
-        <Text> textInComponent </Text>
+        <Text> Decks Display </Text>
       </View>
     );
   }
