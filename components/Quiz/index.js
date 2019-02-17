@@ -106,11 +106,11 @@ class Quiz extends Component {
           onPress={this.handleRestartQuiz}
         />
         <Button
-          title="Select Another Quiz"
+          title="Back to Deck"
           type="outline"
           raised
           containerStyle={styles.scoreButtonContainerStyle}
-          onPress={() => navigation.navigate("DecksDisplay")}
+          onPress={() => navigation.navigate("DeckDetail")}
         />
       </View>
     );

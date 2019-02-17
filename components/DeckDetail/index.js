@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { Button, Card } from "react-native-elements";
+import Toast from "react-native-simple-toast";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Color from "react-native-material-color";
 
@@ -20,9 +21,16 @@ class DeckDetail extends Component {
   };
 
   handleStartQuiz = () => {
-    const { title, navigation } = this.props;
+    const { title, questions, navigation } = this.props;
 
-    navigation.navigate("Quiz", { deckKey: title });
+    if (questions.length > 0) {
+      navigation.navigate("Quiz", { deckKey: title });
+    } else {
+      Toast.show(
+        "This deck is empty. Please add at least 1 card to start the quiz.",
+        Toast.LONG
+      );
+    }
   };
 
   deleteDeck = async () => {

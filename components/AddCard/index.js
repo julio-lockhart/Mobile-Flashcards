@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Keyboard, KeyboardAvoidingView, Text, View } from "react-native";
+import { KeyboardAvoidingView, View } from "react-native";
 import { Button, Card, Input } from "react-native-elements";
 import Color from "react-native-material-color";
 

@@ -4,9 +4,9 @@ import {
   ADD_CARD,
   CLEAR_DECKS,
   DELETE_DECK
-} from "../actions";
+} from "../actions/actionTypes";
 
-function decks(state = {}, action) {
+const decks = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_DECKS:
       return {
@@ -62,6 +62,6 @@ function decks(state = {}, action) {
     default:
       return state;
   }
-}
+};
 
 export default decks;
