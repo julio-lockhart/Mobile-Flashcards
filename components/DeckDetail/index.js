@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import { Button, Card } from "react-native-elements";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Color from "react-native-material-color";
 
 // Redux
 import { connect } from "react-redux";
+import { deleteDeck } from "../../actions/";
+import { deleteDeckFromStorage } from "../../utils/api";
 
 // Constants
 const ICON_SIZE = 20;
@@ -21,6 +23,18 @@ class DeckDetail extends Component {
     const { title, navigation } = this.props;
 
     navigation.navigate("Quiz", { deckKey: title });
+  };
+
+  deleteDeck = async () => {
+    const { title, navigation, dispatch } = this.props;
+
+    // Update Redux
+    dispatch(deleteDeck(title));
+
+    // Save to AsyncStorage
+    await deleteDeckFromStorage(title);
+
+    navigation.navigate("DecksDisplay");
   };
 
   render() {
@@ -71,7 +85,7 @@ class DeckDetail extends Component {
         <Button
           title="Delete Deck"
           buttonStyle={styles.deleteButtonStyle}
-          onPress={() => this.deleteItem()}
+          onPress={() => this.deleteDeck()}
         />
       </View>
     );
@@ -99,9 +113,11 @@ const styles = {
 
 const mapStateToProps = ({ decks }, { navigation }) => {
   const { title } = navigation.state.params;
+  const deck = decks[title];
+
   return {
     title,
-    questions: decks[title].questions
+    questions: deck ? deck.questions : []
   };
 };
 

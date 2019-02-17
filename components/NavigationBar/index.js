@@ -10,7 +10,6 @@ import { Constants } from "expo";
 
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import Color from "react-native-material-color";
-import { purple, white } from "../../utils/colors";
 
 // Components
 import DecksDisplay from "../DecksDisplay";
@@ -123,7 +122,10 @@ export default class NavigationBar extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <StatusBarContainer backgroundColor={purple} barStyle="light-content" />
+        <StatusBarContainer
+          backgroundColor={Color.BLUE[600]}
+          barStyle="light-content"
+        />
         <MainNavigatorContainer />
       </View>
     );

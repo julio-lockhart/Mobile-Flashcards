@@ -1,8 +1,8 @@
 import { AsyncStorage } from "react-native";
-//import { Notifications, Permissions } from 'expo'
+import { Notifications, Permissions } from "expo";
 
-export const DECKS_STORAGE_KEY = "Flashcards:decks";
-//export const NOTIFICATION_KEY = 'IvyFlashcards:notifications'
+export const DECKS_STORAGE_KEY = "RNFlashcards:Decks:Debug";
+export const NOTIFICATION_KEY = "RNFlashcards:Notifications:Debug";
 
 /**
  * Return all of the decks along with their titles, questions, and answers
@@ -47,14 +47,7 @@ const setDummyData = () => {
 };
 
 const formatDecks = results => {
-  //return results === null ? setDummyData() : JSON.parse(results);
-  if (results === null) {
-    console.log("Results are empty");
-    return setDummyData();
-  } else {
-    console.log("Results are not empty");
-    return JSON.parse(results);
-  }
+  return results === null ? setDummyData() : JSON.parse(results);
 };
 
 /**
@@ -109,53 +102,70 @@ export const saveDeckTitle = title => {
     });
 };
 
-// export function clearLocalNotification () {
-//   return AsyncStorage.removeItem(NOTIFICATION_KEY)
-//     .then(Notifications.cancelAllScheduledNotificationsAsync)
-// }
+/**
+ * Delete a deck from storage
+ *
+ * @param {string} title - Title of deck to delete
+ * @function deleteDeckFromStorage
+ */
+export const deleteDeckFromStorage = async title => {
+  const decks = await getDecks();
 
-// function createNotification () {
-//   return {
-//     title: 'Learn by Flashcards!',
-//     body: "👋 don't forget to review your flashcards today!",
-//     ios: {
-//       sound: true,
-//     },
-//     android: {
-//       sound: true,
-//       priority: 'high',
-//       sticky: false,
-//       vibrate: true,
-//     }
-//   }
-// }
+  let newDecks = {};
+  for (let [key, value] of Object.entries(decks)) {
+    if (key !== title) {
+      newDecks[key] = value;
+    }
+  }
 
-// export function setLocalNotification () {
-//   AsyncStorage.getItem(NOTIFICATION_KEY)
-//     .then(JSON.parse)
-//     .then((data) => {
-//       if (data === null) {
-//         Permissions.askAsync(Permissions.NOTIFICATIONS)
-//           .then(({ status }) => {
-//             if (status === 'granted') {
-//               Notifications.cancelAllScheduledNotificationsAsync()
+  await AsyncStorage.removeItem(DECKS_STORAGE_KEY);
+  await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(newDecks));
+};
 
-//               let tomorrow = new Date()
-//               tomorrow.setDate(tomorrow.getDate() + 1)
-//               tomorrow.setHours(20)
-//               tomorrow.setMinutes(0)
+export const clearLocalNotification = () => {
+  return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
+    Notifications.cancelAllScheduledNotificationsAsync
+  );
+};
 
-//               Notifications.scheduleLocalNotificationAsync(
-//                 createNotification(),
-//                 {
-//                   time: tomorrow,
-//                   repeat: 'day',
-//                 }
-//               )
+const createNotification = () => {
+  return {
+    title: "Learn by Flashcards!",
+    body: "👋 don't forget to review your flashcards today!",
+    ios: {
+      sound: true
+    },
+    android: {
+      sound: true,
+      priority: "high",
+      sticky: false,
+      vibrate: true
+    }
+  };
+};
 
-//               AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
-//             }
-//           })
-//       }
-//     })
-// }
+export const setLocalNotification = () => {
+  AsyncStorage.getItem(NOTIFICATION_KEY)
+    .then(JSON.parse)
+    .then(data => {
+      if (data === null) {
+        Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
+          if (status === "granted") {
+            Notifications.cancelAllScheduledNotificationsAsync();
+
+            let tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(20);
+            tomorrow.setMinutes(0);
+
+            Notifications.scheduleLocalNotificationAsync(createNotification(), {
+              time: tomorrow,
+              repeat: "day"
+            });
+
+            AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
+          }
+        });
+      }
+    });
+};

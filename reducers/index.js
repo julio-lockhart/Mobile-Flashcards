@@ -1,4 +1,10 @@
-import { RECEIVE_DECKS, ADD_DECK, ADD_CARD, CLEAR_DECKS } from "../actions";
+import {
+  RECEIVE_DECKS,
+  ADD_DECK,
+  ADD_CARD,
+  CLEAR_DECKS,
+  DELETE_DECK
+} from "../actions";
 
 function decks(state = {}, action) {
   switch (action.type) {
@@ -7,6 +13,7 @@ function decks(state = {}, action) {
         ...state,
         ...action.decks
       };
+
     case ADD_DECK:
       const { deck } = action;
       let data = state.decks;
@@ -17,6 +24,7 @@ function decks(state = {}, action) {
           [deck.title]: deck
         }
       };
+
     case ADD_CARD:
       const { card, title } = action;
       data = state.decks;
@@ -28,14 +36,29 @@ function decks(state = {}, action) {
             title: title,
             questions: data[title].questions.concat([card])
           }
-          // questions: data.questions.push(card)
         }
       };
+
     case CLEAR_DECKS:
       return {
         ...state,
         decks: {}
       };
+
+    case DELETE_DECK:
+      data = state.decks;
+
+      let result = {};
+      for (let [key, value] of Object.entries(data)) {
+        if (key !== action.title) {
+          result[key] = value;
+        }
+      }
+
+      return {
+        decks: result
+      };
+
     default:
       return state;
   }
