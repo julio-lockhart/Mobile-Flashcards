@@ -17,6 +17,7 @@ import DecksDisplay from "../DecksDisplay";
 import CreateDeck from "../CreateDeck";
 import DeckDetail from "../DeckDetail";
 import AddCard from "../AddCard";
+import Quiz from "../Quiz";
 
 const RouteConfigs = {
   DecksDisplay: {
@@ -89,6 +90,17 @@ const MainNavigator = createStackNavigator({
   AddCard: {
     screen: AddCard,
     navigationOptions: {
+      headerTintColor: Color.White,
+      headerStyle: {
+        backgroundColor: Color.Blue
+      }
+    }
+  },
+
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      title: "Quiz",
       headerTintColor: Color.White,
       headerStyle: {
         backgroundColor: Color.Blue

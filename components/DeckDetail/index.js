@@ -17,6 +17,12 @@ class DeckDetail extends Component {
     };
   };
 
+  handleStartQuiz = () => {
+    const { title, navigation } = this.props;
+
+    navigation.navigate("Quiz", { deckKey: title });
+  };
+
   render() {
     const { title, questions } = this.props;
 
@@ -57,11 +63,7 @@ class DeckDetail extends Component {
               }
               buttonStyle={[styles.buttonStyle, { marginTop: 10 }]}
               title="Start Quiz"
-              onPress={() => {
-                this.props.navigation.navigate("QuizMain", {
-                  questions: questions
-                });
-              }}
+              onPress={() => this.handleStartQuiz()}
             />
           </View>
         </Card>
