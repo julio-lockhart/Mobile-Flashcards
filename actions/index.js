@@ -1,11 +1,5 @@
 import { getDecks } from "../utils/api";
-import {
-  RECEIVE_DECKS,
-  ADD_DECK,
-  ADD_CARD,
-  CLEAR_DECKS,
-  DELETE_DECK
-} from "./actionTypes";
+import { RECEIVE_DECKS, ADD_DECK, ADD_CARD, DELETE_DECK } from "./actionTypes";
 
 export const receiveDecks = decks => {
   return {
@@ -26,12 +20,6 @@ export const addCard = (card, title) => {
     type: ADD_CARD,
     card,
     title
-  };
-};
-
-export const clearCustomDecks = () => {
-  return {
-    type: CLEAR_DECKS
   };
 };
 

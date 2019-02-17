@@ -2,7 +2,6 @@ import {
   RECEIVE_DECKS,
   ADD_DECK,
   ADD_CARD,
-  CLEAR_DECKS,
   DELETE_DECK
 } from "../actions/actionTypes";
 
@@ -37,12 +36,6 @@ const decks = (state = {}, action) => {
             questions: data[title].questions.concat([card])
           }
         }
-      };
-
-    case CLEAR_DECKS:
-      return {
-        ...state,
-        decks: {}
       };
 
     case DELETE_DECK:

@@ -73,15 +73,6 @@ export const addCardToDeck = (card, title) => {
 };
 
 /**
- * Initialize app data, clear added decks / cards.
- *
- * @function clearDecks
- */
-export const clearDecks = () => {
-  return AsyncStorage.removeItem(DECKS_STORAGE_KEY);
-};
-
-/**
  * Take in a single title argument and add it to the decks.
  *
  * @function saveDeckTitle
