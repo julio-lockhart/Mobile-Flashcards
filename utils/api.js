@@ -1,8 +1,8 @@
 import { AsyncStorage } from "react-native";
 import { Notifications, Permissions } from "expo";
 
-export const DECKS_STORAGE_KEY = "RNFlashcards:Decks:Debug";
-export const NOTIFICATION_KEY = "RNFlashcards:Notifications:Debug";
+export const DECKS_STORAGE_KEY = "RNFlashcards:Decks";
+export const NOTIFICATION_KEY = "RNFlashcards:Notifications";
 
 /**
  * Return all of the decks along with their titles, questions, and answers
